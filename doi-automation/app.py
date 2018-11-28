@@ -27,28 +27,28 @@ def lambda_handler(event=None, context=None):
 
 @app.route('/assemble.payload', methods=['GET'])
 def api_assemble_payload():
-    socrata_4x4 = request.headers.get('socrata_4x4')
-    draft = request.headers.get('draft')
+    socrata_4x4 = request.args.get('socrata_4x4')
+    draft = request.args.get('draft')
     return jsonify(assemble_payload(socrata_4x4=socrata_4x4, draft=draft))
 
 
 @app.route('/assemble.xml', methods=['GET'])
 def api_assemble_xml():
-    metadata = request.headers.get('metadata')
-    doi_identifier = request.headers.get('doi_identifier')
+    metadata = request.args.get('metadata')
+    doi_identifier = request.args.get('doi_identifier')
     return assemble_xml(metadata=metadata, doi_identifier=doi_identifier)
 
 
 @app.route('/publish.doi', methods=['POST'])
 def api_publish_doi():
-    socrata_4x4 = request.headers.get('socrata_4x4')
+    socrata_4x4 = request.args.get('socrata_4x4')
     return publish_doi(socrata_4x4=socrata_4x4)
 
 
 @app.route('/update.doi', methods=['POST'])
 def api_update_doi():
-    socrata_4x4 = request.headers.get('socrata_4x4')
-    identifier = request.headers.get('identifier')
+    socrata_4x4 = request.args.get('socrata_4x4')
+    identifier = request.args.get('identifier')
     update_doi(socrata_4x4=socrata_4x4, identifier=identifier)
 
 
