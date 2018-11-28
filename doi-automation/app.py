@@ -10,9 +10,14 @@ from extract_metadata import gather_assets
 # from extract_metadata import load_temp_table
 # from extract_metadata import diff_temp_table
 
-from flask import Flask, request
+from flask import Flask, request, make_response, jsonify
 
 app = Flask(__name__)
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -21,35 +26,35 @@ def lambda_handler(event=None, context=None):
 
 
 @app.route('/assemble.payload', methods=['GET'])
-def assemble_payload():
+def api_assemble_payload():
     socrata_4x4 = request.headers.get('socrata_4x4')
     draft = request.headers.get('draft')
-    return assemble_payload(socrata_4x4=socrata_4x4, draft=draft)
+    return jsonify(assemble_payload(socrata_4x4=socrata_4x4, draft=draft))
 
 
 @app.route('/assemble.xml', methods=['GET'])
-def assemble_xml():
+def api_assemble_xml():
     metadata = request.headers.get('metadata')
     doi_identifier = request.headers.get('doi_identifier')
     return assemble_xml(metadata=metadata, doi_identifier=doi_identifier)
 
 
 @app.route('/publish.doi', methods=['POST'])
-def publish_doi():
+def api_publish_doi():
     socrata_4x4 = request.headers.get('socrata_4x4')
     return publish_doi(socrata_4x4=socrata_4x4)
 
 
 @app.route('/update.doi', methods=['POST'])
-def update_doi():
+def api_update_doi():
     socrata_4x4 = request.headers.get('socrata_4x4')
     identifier = request.headers.get('identifier')
     update_doi(socrata_4x4=socrata_4x4, identifier=identifier)
 
 
 @app.route('/gather.socrata.assets', methods=['GET'])
-def gather_assets():
-    return gather_assets()
+def api_gather_assets():
+    return jsonify(gather_assets())
 
 
 if __name__ == '__main__':
