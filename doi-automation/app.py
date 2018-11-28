@@ -1,5 +1,4 @@
 from publish_doi import assemble_payload
-from publish_doi import assemble_xml
 from publish_doi import publish_doi
 
 from update_doi import update_doi
