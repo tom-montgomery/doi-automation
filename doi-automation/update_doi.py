@@ -24,16 +24,17 @@ def update_doi(conn, socrata_4x4, identifier):
 
         r = requests.put('{}{}'.format(url, identifier), auth=(datacite_user, datacite_pass))
     except psycopg2.IntegrityError:
+        "4x4 not found"
         pass
 
     conn.commit()
     cur.close()
 
 
-if __name__ == "__main__":
-    conn = psycopg2.connect(host="localhost", database="citation-station",
-                            user=os.environ['postgres_user'],
-                            password=os.environ['postgres_pass'])
-
-    update_doi(conn, '4hh5-fx4w')
-
+# if __name__ == "__main__":
+#     conn = psycopg2.connect(host="localhost", database="citation-station",
+#                             user=os.environ['postgres_user'],
+#                             password=os.environ['postgres_pass'])
+#
+#     update_doi(conn, '4hh5-fx4w')
+#

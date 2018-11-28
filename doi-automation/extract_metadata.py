@@ -75,18 +75,21 @@ def diff_temp_table(conn):
     return diff_list
 
 
-if __name__ == "__main__":
-
-    conn = psycopg2.connect(host="localhost", database="citation-station",
-                            user=os.environ['postgres_user'],
-                            password=os.environ['postgres_pass'])
-
-    result_assets = gather_assets()
-    load_temp_table(conn, result_assets)
-    diff = diff_temp_table(conn)
-
-    print(len(result_assets))
-    for d in diff:
-        print(d)
-    for asset in result_assets:
-        print(asset)
+# if __name__ == "__main__":
+#
+#     conn = psycopg2.connect(host="localhost", database="citation-station",
+#                             user=os.environ['postgres_user'],
+#                             password=os.environ['postgres_pass'])
+#
+#     result_assets = gather_assets()
+#     load_temp_table(conn, result_assets)
+#     diff = diff_temp_table(conn)
+#
+#     print(count)
+#     print(len(result_assets))
+#     no_desc = 0
+#     for asset in result_assets:
+#         for key in asset.keys():
+#             if asset[key] is None:
+#                 print(key)
+#                 print(asset)

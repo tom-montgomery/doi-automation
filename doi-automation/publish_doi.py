@@ -134,10 +134,10 @@ def publish_doi(conn, socrata_4x4, draft=True):
     cur.close()
 
 
-if __name__ == "__main__":
-    conn = psycopg2.connect(host="localhost", database="citation-station",
-                            user=os.environ['postgres_user'],
-                            password=os.environ['postgres_pass'])
-
-    publish_doi(conn, '4hh5-fx4w')
+# if __name__ == "__main__":
+#     conn = psycopg2.connect(host="localhost", database="citation-station",
+#                             user=os.environ['postgres_user'],
+#                             password=os.environ['postgres_pass'])
+#
+#     publish_doi(conn, '4hh5-fx4w')
 
