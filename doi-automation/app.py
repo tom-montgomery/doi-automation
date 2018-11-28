@@ -32,13 +32,6 @@ def api_assemble_payload():
     return jsonify(assemble_payload(socrata_4x4=socrata_4x4, draft=draft))
 
 
-@app.route('/assemble.xml', methods=['GET'])
-def api_assemble_xml():
-    metadata = request.args.get('metadata')
-    doi_identifier = request.args.get('doi_identifier')
-    return assemble_xml(metadata=metadata, doi_identifier=doi_identifier)
-
-
 @app.route('/publish.doi', methods=['POST'])
 def api_publish_doi():
     socrata_4x4 = request.args.get('socrata_4x4')
